@@ -21,8 +21,8 @@ def get_embedding(text):
     return response.data[0].embedding
 
 # 🧠 Interface
-st.title("🔎 Codage Médical Automatique (MedDRA + OpenAI)")
-uploaded_file = st.file_uploader("📤 Dépose ton fichier AE (.txt tabulé)", type=["txt"])
+st.title("🔎 Automatic Medical Coding (MedDRA)")
+uploaded_file = st.file_uploader("📤 Upload your AE file (.txt tabulated)", type=["txt"])
 
 if uploaded_file:
     df_ae = pd.read_csv(uploaded_file, sep="\t")
@@ -69,7 +69,7 @@ if uploaded_file:
 
     # 📥 Téléchargement
     st.download_button(
-        label="📥 Télécharger les résultats Excel",
+        label="📥 Download Excel results",
         data=output,
         file_name="AE_CODING.xlsx",
         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
