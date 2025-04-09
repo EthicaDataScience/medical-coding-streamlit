@@ -5,7 +5,7 @@ import openai
 from sklearn.metrics.pairwise import cosine_similarity
 from io import BytesIO
 
-# 🔐 Utilisateurs autorisés (email: mot de passe)
+# 🔐 Utilisateurs autorisés (email: Password)
 AUTHORIZED_USERS = {
     "skaba@ethicacro.com": "Kaba19",
     "data.management@ethicacro.com": "z8K!ef92mT",
@@ -21,19 +21,19 @@ if "user_email" not in st.session_state:
 # 🔓 Bouton de déconnexion
 if st.session_state.authenticated:
     with st.sidebar:
-        st.write(f"👤 Connecté en tant que **{st.session_state.user_email}**")
-        if st.button("🔓 Se déconnecter"):
+        st.write(f"👤 Logged in as **{st.session_state.user_email}**")
+        if st.button("🔓 Log out"):
             st.session_state.authenticated = False
             st.session_state.user_email = None
             st.rerun()
 
 # 🔐 Formulaire de connexion
 if not st.session_state.authenticated:
-    st.title("🔐 Authentification requise")
+    st.title("🔐 Authentication required")
     with st.form("login_form"):
         email = st.text_input("📧 Email")
-        password = st.text_input("🔑 Mot de passe", type="password")
-        submitted = st.form_submit_button("Se connecter")
+        password = st.text_input("🔑 Password", type="password")
+        submitted = st.form_submit_button("Log in")
 
     if submitted:
         if email in AUTHORIZED_USERS and AUTHORIZED_USERS[email] == password:
@@ -42,7 +42,7 @@ if not st.session_state.authenticated:
             st.success(f"✅ Bienvenue, {email} !")
             st.rerun()
         else:
-            st.error("❌ Email ou mot de passe incorrect.")
+            st.error("❌ Email ou Password incorrect.")
     st.stop()
 
 # ✅ Si connecté, suite de l’application
